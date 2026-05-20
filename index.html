@@ -6,33 +6,33 @@
 
 <style>
   :root {
-    --bg: #0c0c0e;
-    --surface: #15151a;
-    --surface-2: #1c1c22;
-    --border: #2a2a32;
-    --border-strong: #3a3a44;
-    --text: #e8e6e0;
-    --text-dim: #8a8a92;
-    --text-faint: #5a5a64;
-    --accent: #d4a574;
-    --accent-dim: #6b5440;
-    --warn: #b86b6b;
-    --ok: #7ba368;
+    --bg: #0a0a0a;
+    --surface: #161616;
+    --surface-2: #1f1f1f;
+    --border: #2a2a2a;
+    --border-strong: #3a3a3a;
+    --text: #f4f4f4;
+    --text-dim: #a0a0a0;
+    --text-faint: #6a6a6a;
+    --accent: #ff8a3d;
+    --accent-dim: #8a4a20;
+    --warn: #e26060;
+    --ok: #6ab86a;
   }
 
   :root[data-theme="light"] {
-    --bg: #f7f3eb;
-    --surface: #efeadb;
-    --surface-2: #e5dfcd;
-    --border: #d6cfb9;
-    --border-strong: #b0a98f;
-    --text: #1f1d18;
-    --text-dim: #5e594d;
-    --text-faint: #8a8472;
-    --accent: #8b5a2b;
-    --accent-dim: #b88e60;
-    --warn: #963838;
-    --ok: #4e7345;
+    --bg: #ffffff;
+    --surface: #f6f6f6;
+    --surface-2: #ebebeb;
+    --border: #d4d4d4;
+    --border-strong: #a8a8a8;
+    --text: #0a0a0a;
+    --text-dim: #6a6a6a;
+    --text-faint: #999999;
+    --accent: #d6471d;
+    --accent-dim: #a83815;
+    --warn: #c4322e;
+    --ok: #4a8d4a;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -71,10 +71,21 @@
     color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.08em; font-size: 11px;
   }
 
-  .saved-tag { font-size: 9px; color: var(--text-faint); letter-spacing: 0.1em; }
+  .saved-tag {
+    font-size: 9px;
+    color: var(--text-faint);
+    letter-spacing: 0.1em;
+    min-width: 170px;
+    display: inline-block;
+  }
   .saved-tag.live { color: var(--ok); }
 
-  .mode-switch { display: flex; background: var(--surface); border: 1px solid var(--border-strong); }
+  .mode-switch {
+    margin-left: auto;
+    display: flex;
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
+  }
   .mode-btn {
     background: transparent; border: none; color: var(--text-dim);
     font-family: inherit; font-size: 10px; letter-spacing: 0.12em;
@@ -367,6 +378,56 @@
   .check-row .check-text { font-size: 11px; line-height: 1.45; color: var(--text-dim); }
   .check-row.checked .check-text { color: var(--warn); }
 
+  /* ============= MISC / LEGACY DATA ============= */
+  .misc-card {
+    background: var(--bg);
+    padding: 18px 20px 22px;
+    border-left: 2px solid var(--text-faint);
+  }
+  .misc-card .card-title {
+    color: var(--text-dim);
+  }
+  .misc-item {
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+  }
+  .misc-key {
+    font-size: 11px;
+    color: var(--text-faint);
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .misc-note {
+    font-size: 12px;
+    color: var(--text);
+    padding: 10px 12px;
+    background: var(--surface);
+    border-left: 2px solid var(--border-strong);
+    white-space: pre-wrap;
+    line-height: 1.55;
+  }
+  .misc-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 6px;
+  }
+  .misc-btn {
+    background: transparent;
+    border: 1px solid var(--border-strong);
+    color: var(--text-dim);
+    font-family: inherit;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .misc-btn:hover { color: var(--accent); border-color: var(--accent); }
+  .misc-btn.danger:hover { color: var(--warn); border-color: var(--warn); }
+
   .footer {
     padding: 16px 24px 24px; border-top: 1px solid var(--border);
     font-size: 10px; color: var(--text-faint); letter-spacing: 0.05em; text-align: center;
@@ -398,11 +459,10 @@
     <select class="btn" id="dealSelect">
       <option value="">LOAD DEAL</option>
     </select>
-    <button class="btn" id="demoBtn" title="Load sample deal data">DEMO</button>
+    <button class="btn danger" id="deleteBtn" title="Delete the loaded deal" style="display:none">DELETE DEAL</button>
     <button class="btn" id="exportBtn" title="Download all deal data as JSON">EXPORT</button>
     <button class="btn" id="importBtn" title="Restore deal data from JSON">IMPORT</button>
     <button class="btn" id="themeBtn" title="Toggle light/dark">LIGHT</button>
-    <button class="btn" id="printBtn">PRINT</button>
     <button class="btn danger" id="resetBtn">RESET</button>
   </div>
   <div class="coverage">
@@ -454,7 +514,7 @@
   </div>
 </div>
 
-<div class="footer">Quinn Call Deck. Auto-saves per deal. GATES = required to advance to demo. TRACK = everything (gates + pre-proposal).</div>
+<div class="footer">Quinn Call Deck. Auto-saves per deal. GATES = required to advance to demo. TRACK = everything. EXPORT often.</div>
 
 <script>
   // ============================================
@@ -927,8 +987,72 @@
       grid.appendChild(card);
     });
 
+    // Add MISC card if there are orphaned notes from old schemas
+    const orphans = getOrphanedNotes();
+    if (orphans.length > 0) {
+      const miscCard = document.createElement('div');
+      miscCard.className = 'card misc-card';
+      miscCard.innerHTML = `
+        <div class="card-head">
+          <span class="card-title">MISC · LEGACY DATA</span>
+          <span class="card-num">${orphans.length}</span>
+        </div>
+        <div class="card-sub">Notes from previous schema. Copy what you need to current fields, then delete.</div>
+        <div class="items">
+          ${orphans.map(o => `
+            <div class="item misc-item">
+              <div class="misc-key">${escapeHtml(o.id)}</div>
+              <div class="misc-note">${escapeHtml(o.note)}</div>
+              <div class="misc-actions">
+                <button class="misc-btn" data-misc-copy="${o.id}">COPY TEXT</button>
+                <button class="misc-btn danger" data-misc-delete="${o.id}">DELETE</button>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+      grid.appendChild(miscCard);
+
+      miscCard.querySelectorAll('[data-misc-copy]').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const id = btn.dataset.miscCopy;
+          const text = state.notes[id] || '';
+          try {
+            await navigator.clipboard.writeText(text);
+            const original = btn.textContent;
+            btn.textContent = 'COPIED';
+            setTimeout(() => { btn.textContent = original; }, 1200);
+          } catch (e) {
+            alert('Copy failed. Select the text manually.');
+          }
+        });
+      });
+
+      miscCard.querySelectorAll('[data-misc-delete]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.dataset.miscDelete;
+          if (!confirm(`Delete orphaned note "${id}"? This cannot be undone. Copy the text first if you need it.`)) return;
+          delete state.notes[id];
+          if (state.items[id] !== undefined) delete state.items[id];
+          render();
+          debouncedSave();
+        });
+      });
+    }
+
     attachItemEvents(grid);
     attachNoteEvents(grid);
+  }
+
+  function getOrphanedNotes() {
+    const validIds = new Set(ALL_ITEMS.map(i => i.id));
+    const orphans = [];
+    for (const [id, note] of Object.entries(state.notes || {})) {
+      if (!validIds.has(id) && note && note.trim()) {
+        orphans.push({ id, note });
+      }
+    }
+    return orphans.sort((a, b) => a.id.localeCompare(b.id));
   }
 
   function attachItemEvents(scope) {
@@ -1066,12 +1190,15 @@
 
   function renderSavedTag() {
     const tag = document.getElementById('savedTag');
+    const deleteBtn = document.getElementById('deleteBtn');
     if (state.name && state.name.trim()) {
       tag.textContent = 'AUTO-SAVE ON';
       tag.classList.remove('live');
+      if (deleteBtn) deleteBtn.style.display = '';
     } else {
       tag.textContent = 'NO DEAL (state not saved)';
       tag.classList.remove('live');
+      if (deleteBtn) deleteBtn.style.display = 'none';
     }
   }
 
@@ -1119,16 +1246,6 @@
     }
   });
 
-  document.getElementById('printBtn').addEventListener('click', () => {
-    if (state.mode !== 'prep') {
-      state.mode = 'prep';
-      render();
-      setTimeout(() => window.print(), 200);
-    } else {
-      window.print();
-    }
-  });
-
   document.addEventListener('change', (e) => {
     if (e.target && e.target.id === 'showCovered') {
       state.showCovered = e.target.checked;
@@ -1138,60 +1255,32 @@
   });
 
   // ============================================
-  // DEMO DEAL - matches new stage-gate schema
+  // DELETE DEAL - remove a saved deal from storage
   // ============================================
-  const DEMO_DEAL = {
-    name: 'Blue Ridge HVAC (DEMO)',
-    mode: 'gates',
-    showCovered: false,
-    items: {
-      pain_statement: true,
-      pain_quantified: true,
-      learner_count: true,
-      current_system: true,
-      operational_owner: true,
-      economic_buyer: true,
-      second_stakeholder: false,
-      buyer_journey: false,
-      pct_frontline: true,
-      multi_location: true,
-      languages: true,
-      ramp_time: true,
-      product_orientation: false,
-      lms_satisfaction: true,
-      compelling_event: true,
-    },
-    notes: {
-      pain_statement: 'Blue Ridge HVAC is losing senior tech billable hours and burning out their best people because new techs require a 60-day ride-along ramp with no consistent training across 4 branches.',
-      pain_quantified: '~$120k/yr total. Ingredients: ride-along time = 15-20 hrs/wk per senior tech at $50/hr billable = $40-50k. Plus 25% year-one turnover with avg $30k replacement cost across ~12 hires = $90k. Confirm number on Call 2.',
-      learner_count: '180 techs across 4 branches. Hiring 12-15/quarter. Ramping to 20+ next year for new locations.',
-      current_system: 'Nothing formal. Tried Trainual 2 years ago, failed because no one logged in. Currently ride-along + tribal knowledge from Steve and one other senior tech.',
-      operational_owner: 'Sarah Tellez, Director of Training. Has been pushing internally for 6+ months. Owns L&D budget under $25k. Strong champion.',
-      economic_buyer: 'Mark Schmidt, COO. Approves anything over $25k. Sarah said he is hands-on but reasonable. Need him in the demo.',
-      second_stakeholder: '',
-      buyer_journey: '',
-      pct_frontline: '~70% of total headcount is field/frontline. Back office is small.',
-      multi_location: '4 branches in NC/SC currently. Mark wants 2 more in 2026.',
-      languages: 'English primary. ~30% of new hires are Spanish-primary speakers.',
-      ramp_time: '60-day ride-along program. Full productivity at 5-6 months realistically.',
-      product_orientation: '',
-      lms_satisfaction: 'N/A, no current LMS. Past Trainual experience was a failure (no login adoption).',
-      compelling_event: 'Opening 2 new branches Q2 2026. Need to scale training infrastructure before then or it breaks.',
-    },
-    flags: {
-      rf_no_pain: false, rf_no_owner: false, rf_no_path: false, rf_single: true,
-      rf_pricing_first: false, rf_content_only: false, rf_lms_entrenched: false,
-      rf_outside_icp: false, rf_1000plus: false,
-    },
-  };
+  async function deleteDeal() {
+    const name = state.name.trim();
+    if (!name) return;
+    const confirmed = confirm(`Delete "${name}"? This cannot be undone. Export first if you want a backup.`);
+    if (!confirmed) return;
 
-  document.getElementById('demoBtn').addEventListener('click', async () => {
-    state = JSON.parse(JSON.stringify(DEMO_DEAL));
-    document.getElementById('dealName').value = state.name;
-    await saveState();
+    try {
+      await storage.delete(dealKey(name));
+    } catch (e) {
+      alert('Delete failed: ' + e.message);
+      return;
+    }
+
+    const mode = state.mode;
+    state = freshState();
+    state.mode = mode;
+    document.getElementById('dealName').value = '';
+    document.getElementById('dealSelect').value = '';
     await refreshDealList();
     render();
-  });
+  }
+
+  document.getElementById('deleteBtn').addEventListener('click', deleteDeal);
+
 
   // ============================================
   // EXPORT / IMPORT - backup and restore
