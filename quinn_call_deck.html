@@ -1,0 +1,1193 @@
+<meta charset="utf-8">
+<title>Quinn Call Deck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #0c0c0e;
+    --surface: #15151a;
+    --surface-2: #1c1c22;
+    --border: #2a2a32;
+    --border-strong: #3a3a44;
+    --text: #e8e6e0;
+    --text-dim: #8a8a92;
+    --text-faint: #5a5a64;
+    --accent: #d4a574;
+    --accent-dim: #6b5440;
+    --warn: #b86b6b;
+    --ok: #7ba368;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  textarea { font-family: inherit; }
+
+  /* TOP BAR */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+
+  .brand {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+  }
+
+  .brand .dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    margin-right: 8px;
+    animation: pulse 2.5s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.35; }
+  }
+
+  .deal-input {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 12px;
+    padding: 7px 12px;
+    width: 240px;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .deal-input:focus { border-color: var(--accent); }
+  .deal-input::placeholder {
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 11px;
+  }
+
+  .saved-tag { font-size: 9px; color: var(--text-faint); letter-spacing: 0.1em; }
+  .saved-tag.live { color: var(--ok); }
+
+  .mode-switch { display: flex; background: var(--surface); border: 1px solid var(--border-strong); }
+  .mode-btn {
+    background: transparent; border: none; color: var(--text-dim);
+    font-family: inherit; font-size: 10px; letter-spacing: 0.12em;
+    text-transform: uppercase; padding: 7px 16px; cursor: pointer;
+    transition: all 0.15s;
+  }
+  .mode-btn:hover { color: var(--text); }
+  .mode-btn.active { background: var(--accent); color: var(--bg); font-weight: 600; }
+
+  .topbar-actions { display: flex; gap: 8px; }
+
+  .btn {
+    background: transparent; border: 1px solid var(--border-strong); color: var(--text-dim);
+    font-family: inherit; font-size: 10px; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 7px 14px; cursor: pointer; transition: all 0.15s;
+  }
+  .btn:hover { color: var(--text); border-color: var(--accent); }
+  .btn.danger:hover { color: var(--warn); border-color: var(--warn); }
+  select.btn {
+    appearance: none; padding-right: 28px;
+    background-image: linear-gradient(45deg, transparent 50%, var(--text-dim) 50%), linear-gradient(135deg, var(--text-dim) 50%, transparent 50%);
+    background-position: calc(100% - 14px) 50%, calc(100% - 10px) 50%;
+    background-size: 4px 4px; background-repeat: no-repeat;
+  }
+
+  .coverage {
+    margin-left: auto; display: flex; align-items: center; gap: 14px;
+  }
+  .coverage-label {
+    font-size: 10px; letter-spacing: 0.15em; color: var(--text-dim); text-transform: uppercase;
+  }
+  .coverage-bar {
+    width: 140px; height: 4px; background: var(--surface-2); overflow: hidden;
+  }
+  .coverage-fill {
+    height: 100%; background: var(--accent); transition: width 0.3s ease; width: 0%;
+  }
+  .coverage-num {
+    font-size: 12px; font-weight: 600; color: var(--text); min-width: 50px;
+  }
+
+  /* ============= TRACK MODE ============= */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .card { background: var(--bg); padding: 18px 20px 22px; }
+
+  .card-head {
+    display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 4px;
+  }
+  .card-title {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.18em; color: var(--accent);
+  }
+  .card-num { font-size: 10px; color: var(--text-faint); font-weight: 500; }
+  .card-sub {
+    font-size: 10px; color: var(--text-faint); margin-bottom: 14px;
+    letter-spacing: 0.05em; text-transform: uppercase;
+  }
+
+  .items { display: flex; flex-direction: column; }
+
+  .item {
+    display: flex; gap: 10px; padding: 12px 0;
+    border-top: 1px solid var(--border);
+  }
+  .item:first-child { border-top: none; padding-top: 4px; }
+
+  .item-mark {
+    flex-shrink: 0; width: 14px; height: 14px;
+    border: 1px solid var(--border-strong); margin-top: 3px;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s; cursor: pointer;
+  }
+  .item-mark::after {
+    content: ''; width: 6px; height: 6px; background: transparent; transition: background 0.15s;
+  }
+  .item-mark:hover { border-color: var(--accent); }
+  .item.covered .item-mark { border-color: var(--accent); background: var(--accent); }
+  .item.covered .item-mark::after { background: var(--bg); }
+
+  .item-body { flex: 1; min-width: 0; }
+  .item-q {
+    font-size: 12px; color: var(--text); font-weight: 500; line-height: 1.45;
+    cursor: pointer; user-select: none;
+  }
+  .item-hint {
+    font-size: 10px; color: var(--text-faint); margin-top: 2px; line-height: 1.5;
+  }
+  .item.covered .item-q { color: var(--text-dim); }
+  .item.covered .item-hint { opacity: 0.5; }
+
+  /* NOTE INPUT */
+  .note {
+    display: block;
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px dashed var(--border);
+    color: var(--text);
+    font-size: 11.5px;
+    line-height: 1.5;
+    padding: 6px 0 4px;
+    margin-top: 6px;
+    resize: none;
+    outline: none;
+    min-height: 22px;
+    overflow: hidden;
+    transition: all 0.18s;
+  }
+  .note::placeholder {
+    color: var(--text-faint);
+    font-style: italic;
+    letter-spacing: 0.02em;
+  }
+  .note:focus {
+    border-bottom: 1px solid var(--accent);
+    min-height: 70px;
+    background: var(--surface);
+    padding: 8px 10px;
+  }
+  .note.has-content {
+    color: var(--accent);
+    border-bottom-color: var(--accent-dim);
+  }
+  .note.has-content:focus {
+    color: var(--text);
+  }
+
+  /* ============= PREP MODE ============= */
+  .prep {
+    padding: 28px 32px 60px;
+    max-width: 920px;
+    margin: 0 auto;
+  }
+  .prep-head {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 18px;
+    margin-bottom: 28px;
+  }
+  .prep-h1 {
+    font-size: 18px; font-weight: 700; letter-spacing: 0.04em; color: var(--text); margin-bottom: 6px;
+  }
+  .prep-meta { font-size: 11px; color: var(--text-dim); letter-spacing: 0.05em; }
+  .prep-meta strong { color: var(--accent); }
+
+  .prep-empty {
+    text-align: center; padding: 60px 20px; color: var(--text-dim); font-size: 13px;
+  }
+  .prep-empty strong {
+    color: var(--ok); display: block; font-size: 16px; margin-bottom: 8px; letter-spacing: 0.1em;
+  }
+
+  .prep-bucket { margin-bottom: 36px; }
+  .prep-bucket-head {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.2em; color: var(--accent);
+    padding-bottom: 6px; border-bottom: 1px solid var(--border); margin-bottom: 16px;
+  }
+
+  .prep-item {
+    margin-bottom: 22px; padding: 16px 18px;
+    background: var(--surface); border-left: 2px solid var(--accent);
+  }
+  .prep-item.covered { border-left-color: var(--ok); opacity: 0.85; }
+
+  .prep-item-head {
+    display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 12px;
+  }
+  .prep-item-title {
+    font-size: 14px; font-weight: 600; color: var(--text); letter-spacing: 0.02em;
+  }
+  .prep-item-toggle {
+    background: transparent; border: 1px solid var(--border-strong); color: var(--text-dim);
+    font-family: inherit; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 4px 10px; cursor: pointer;
+  }
+  .prep-item-toggle:hover { color: var(--accent); border-color: var(--accent); }
+  .prep-item.covered .prep-item-toggle { color: var(--ok); border-color: var(--ok); }
+
+  .prep-section { margin-top: 10px; font-size: 12px; line-height: 1.6; }
+  .prep-label {
+    font-size: 9px; font-weight: 700; letter-spacing: 0.15em;
+    color: var(--text-faint); text-transform: uppercase; margin-bottom: 4px;
+  }
+
+  .prep-questions { list-style: none; padding: 0; }
+  .prep-questions li {
+    padding: 5px 0 5px 16px;
+    position: relative;
+    color: var(--text);
+    font-size: 12.5px;
+  }
+  .prep-questions li::before {
+    content: '"';
+    position: absolute; left: 0; color: var(--accent);
+    font-size: 16px; line-height: 1; top: 4px;
+  }
+  .prep-questions li::after { content: '"'; color: var(--accent); margin-left: 2px; }
+
+  .prep-listen, .prep-captured {
+    color: var(--text-dim); font-size: 11.5px; font-style: italic;
+  }
+
+  /* Captured note display in prep */
+  .prep-captured-note {
+    background: var(--bg);
+    border: 1px solid var(--accent-dim);
+    border-left: 3px solid var(--accent);
+    padding: 10px 12px;
+    margin-top: 10px;
+    color: var(--text);
+    font-size: 12px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+  }
+
+  /* Editable note in prep */
+  .prep-note {
+    display: block;
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--border-strong);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 12px;
+    line-height: 1.55;
+    padding: 10px 12px;
+    margin-top: 8px;
+    resize: vertical;
+    outline: none;
+    min-height: 60px;
+    transition: border-color 0.15s;
+  }
+  .prep-note:focus { border-color: var(--accent); }
+  .prep-note::placeholder { color: var(--text-faint); font-style: italic; }
+
+  .prep-controls {
+    display: flex; gap: 16px; margin-bottom: 20px; flex-wrap: wrap;
+  }
+  .prep-controls label {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-dim); cursor: pointer;
+  }
+  .prep-controls input[type="checkbox"] {
+    appearance: none; width: 14px; height: 14px;
+    border: 1px solid var(--border-strong); background: var(--surface); cursor: pointer; position: relative;
+  }
+  .prep-controls input[type="checkbox"]:checked {
+    background: var(--accent); border-color: var(--accent);
+  }
+  .prep-controls input[type="checkbox"]:checked::after {
+    content: ''; position: absolute; width: 6px; height: 6px; background: var(--bg); top: 3px; left: 3px;
+  }
+
+  /* ============= LOWER ============= */
+  .lower {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border);
+  }
+  @media (max-width: 800px) { .lower { grid-template-columns: 1fr; } }
+
+  .panel { background: var(--bg); padding: 20px 24px 24px; }
+  .panel-head {
+    display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px;
+  }
+  .panel-title {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.18em; color: var(--text);
+  }
+  .panel-title.warn { color: var(--warn); }
+  .panel-title.ok { color: var(--ok); }
+  .panel-meta { font-size: 10px; color: var(--text-faint); }
+  .panel-meta.warn { color: var(--warn); }
+  .panel-meta.ok { color: var(--ok); }
+
+  .check-row {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 7px 0; border-top: 1px solid var(--border);
+    cursor: pointer; user-select: none;
+  }
+  .check-row:first-of-type { border-top: none; }
+  .check-row .item-mark { margin-top: 2px; }
+  .check-row.checked .item-mark { border-color: var(--text); background: var(--text); }
+  .check-row.checked .item-mark::after { background: var(--bg); }
+  .check-row.flag.checked .item-mark { border-color: var(--warn); background: var(--warn); }
+  .check-row .check-text { font-size: 11px; line-height: 1.45; color: var(--text-dim); }
+  .check-row.checked .check-text { color: var(--text); }
+  .check-row.flag.checked .check-text { color: var(--warn); }
+
+  .footer {
+    padding: 16px 24px 24px;
+    border-top: 1px solid var(--border);
+    font-size: 10px; color: var(--text-faint);
+    letter-spacing: 0.05em; text-align: center;
+  }
+
+  @media print {
+    body { background: white; color: black; }
+    .topbar, .footer { display: none; }
+    .prep-item { background: white; border-left-color: #555; }
+    .prep-bucket-head { color: black; border-color: #ccc; }
+    .prep-item-title, .prep-questions li { color: black; }
+    .prep-questions li::before, .prep-questions li::after { color: #555; }
+    .prep-h1 { color: black; }
+    .prep-captured-note { background: #f5f5f5; border-color: #999; color: black; }
+    .prep-note { display: none; }
+  }
+</style>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span>QUINN CALL DECK</div>
+  <input type="text" class="deal-input" id="dealName" placeholder="Deal name" autocomplete="off">
+  <span class="saved-tag" id="savedTag"></span>
+  <div class="mode-switch">
+    <button class="mode-btn active" data-mode="track">TRACK</button>
+    <button class="mode-btn" data-mode="prep">PREP</button>
+  </div>
+  <div class="topbar-actions">
+    <select class="btn" id="dealSelect">
+      <option value="">LOAD DEAL</option>
+    </select>
+    <button class="btn" id="demoBtn" title="Load sample deal data">DEMO</button>
+    <button class="btn" id="printBtn">PRINT</button>
+    <button class="btn danger" id="resetBtn">RESET</button>
+  </div>
+  <div class="coverage">
+    <span class="coverage-label">COVERAGE</span>
+    <div class="coverage-bar"><div class="coverage-fill" id="coverFill"></div></div>
+    <span class="coverage-num" id="coverNum">0 / 15</span>
+  </div>
+</div>
+
+<div id="trackView">
+  <div class="grid" id="grid"></div>
+  <div class="lower">
+    <div class="panel">
+      <div class="panel-head">
+        <div class="panel-title ok">PRESSURE TEST</div>
+        <div class="panel-meta ok" id="qualMeta">0 / 10 (pass at 7+)</div>
+      </div>
+      <div id="qualList"></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head">
+        <div class="panel-title warn">RED FLAGS</div>
+        <div class="panel-meta warn" id="flagMeta">0 flagged</div>
+      </div>
+      <div id="flagList"></div>
+    </div>
+  </div>
+</div>
+
+<div id="prepView" style="display:none">
+  <div class="prep">
+    <div class="prep-head">
+      <div class="prep-h1" id="prepTitle">CALL PREP</div>
+      <div class="prep-meta" id="prepMeta">Pre-call question list with what you've already captured.</div>
+    </div>
+    <div class="prep-controls">
+      <label><input type="checkbox" id="showCovered"> Show items already captured</label>
+    </div>
+    <div id="prepBody"></div>
+  </div>
+</div>
+
+<div class="footer">Quinn Call Deck. Notes auto-save per deal. Tab between fields. Esc to blur.</div>
+
+<script>
+  // ============================================
+  // DATA
+  // ============================================
+  const BUCKETS = [
+    {
+      id: 'pain', title: 'PAIN', sub: 'What hurts and where it breaks',
+      items: [
+        { id: 'pain_types', q: 'Pain types confirmed', hint: 'Which of the 6 categories apply',
+          notePlaceholder: 'e.g. tribal knowledge, multi-site inconsistency',
+          questions: [
+            'Walk me through how you train someone new today, start to finish.',
+            'What does your current training program actually look like?',
+            'If a new tech started Monday, what happens?',
+          ],
+          listen: 'No formal process, ride-alongs, "shadow Steve," tribal knowledge, site-to-site inconsistency, multilingual, compliance language.',
+          captured: 'Two or three specific pain types from their own description, not your assumption.',
+        },
+        { id: 'pain_where', q: 'Walk me through it', hint: 'Detail, not summary',
+          notePlaceholder: 'their process, step by step',
+          questions: [
+            'Walk me through what it looks like from offer letter to first solo job.',
+            'Take me through your onboarding week by week.',
+            'What does day one look like for a new hire?',
+          ],
+          listen: 'Specifics over generalities. Hesitation at the broken parts.',
+          captured: 'You can sketch their process on a whiteboard without making things up.',
+        },
+        { id: 'pain_break', q: 'Where does it break', hint: 'The friction point',
+          notePlaceholder: 'specific moment in their process',
+          questions: [
+            'Where does this break down?',
+            'What part of this is the most painful?',
+            'If you could wave a wand and fix one thing, what would it be?',
+          ],
+          listen: 'Emotional language. Specific stories. Repetition.',
+          captured: 'You can point to a specific moment and they would nod.',
+        },
+      ],
+    },
+    {
+      id: 'size', title: 'SIZE', sub: 'Scope of the opportunity',
+      items: [
+        { id: 'size_count', q: 'Frontline headcount + hiring frequency', hint: 'Numbers and cadence',
+          notePlaceholder: 'e.g. 300 techs, hiring 8-10/month',
+          questions: [
+            'How big is your field team today?',
+            'How many techs are you onboarding annually?',
+            'What is hiring like right now?',
+          ],
+          listen: 'Specific numbers. Growth language. Turnover hints. Seasonality.',
+          captured: 'Headcount bucket and hiring-frequency bucket without guessing.',
+        },
+        { id: 'size_scope', q: 'Locations and roles in scope', hint: 'Deployment surface area',
+          notePlaceholder: 'e.g. 12 branches, techs + CSRs',
+          questions: [
+            'How many locations would this touch?',
+            'Are you thinking just techs, or other roles too?',
+            'Who else on the team would benefit from this?',
+          ],
+          listen: 'Site counts. Geographic spread. Role expansion language.',
+          captured: 'You can scope a deployment with sites and role count.',
+        },
+      ],
+    },
+    {
+      id: 'path', title: 'PATH TO WIN', sub: 'What it takes to get to signed',
+      items: [
+        { id: 'path_approver', q: 'Final approver named', hint: 'Who actually signs',
+          notePlaceholder: 'name + title + how to reach',
+          questions: [
+            'Beyond yourself, who else weighs in on a decision like this?',
+            'What does the approval process look like for a tool like this?',
+            'If you wanted to bring this in tomorrow, what would that take?',
+          ],
+          listen: '"I would need to run it by..." Title-level language. Hesitation about their own authority.',
+          captured: 'Name, title, and a path to reach them.',
+        },
+        { id: 'path_champion', q: 'Champion identified + strength', hint: 'Will they fight for this?',
+          notePlaceholder: 'name + strong/soft/unclear',
+          questions: [
+            'Have you brought tools like this in before?',
+            'Who else feels this pain alongside you?',
+            'Would you be the one driving this internally?',
+          ],
+          listen: 'Ownership language. Enthusiasm vs. polite interest. Past internal selling.',
+          captured: 'You know if they will fight for this deal or just hear you out.',
+        },
+        { id: 'path_others', q: 'Other stakeholders mapped', hint: 'Who else needs to be in the room',
+          notePlaceholder: 'names + roles',
+          questions: [
+            'Who else would want to be part of the demo?',
+            'Anyone else on the team thinking about this problem?',
+            'Who else would have an opinion on something like this?',
+          ],
+          listen: 'Cross-functional mentions. Veto signals. Gatekeepers.',
+          captured: 'A list, even if short, of who else to get in front of.',
+        },
+        { id: 'path_steps', q: 'Steps from verbal to signed', hint: 'The paper path',
+          notePlaceholder: 'e.g. legal review 2wk, security questionnaire, EOM cycle',
+          questions: [
+            'Walk me through what happens after we agree on terms.',
+            'Anything around legal, security, or procurement I should know about?',
+            'How does your fiscal year affect this?',
+          ],
+          listen: 'Process specifics. Timeline indicators. Vendor onboarding mentions.',
+          captured: 'Steps from verbal to signed, with a rough timeline.',
+        },
+      ],
+    },
+    {
+      id: 'needs', title: 'NEEDS', sub: 'What they have to see to buy',
+      items: [
+        { id: 'needs_must', q: 'Top 3 must-haves in their words', hint: 'Specific capability requirements',
+          notePlaceholder: '1. ... 2. ... 3. ...',
+          questions: [
+            'What does a great solution look like for you?',
+            'What are the must-haves vs. the nice-to-haves?',
+            'If we built the perfect tool for you, what would it do?',
+          ],
+          listen: 'Specific capability language. "Must" vs. "would be nice."',
+          captured: 'Three specific things in their language.',
+        },
+        { id: 'needs_break', q: 'Deal-breakers known', hint: 'What kills the deal',
+          notePlaceholder: 'red lines, past failures',
+          questions: [
+            'What would make this a no?',
+            'Anything we should not do?',
+            'Where could this go wrong?',
+          ],
+          listen: 'Past bad experiences. Red lines. Strong negatives.',
+          captured: 'You know which landmines are in the room.',
+        },
+        { id: 'needs_status', q: 'Status quo and alternatives', hint: 'What you are up against',
+          notePlaceholder: 'competitors + what they tried',
+          questions: [
+            'What else are you looking at?',
+            'What have you tried before?',
+            'Why has this not been solved already?',
+          ],
+          listen: 'Competitor mentions. Failed past attempts and why.',
+          captured: 'You can name what you are up against and why the last attempt failed.',
+        },
+      ],
+    },
+    {
+      id: 'roi', title: 'ROI', sub: 'The cost of pain and the math',
+      items: [
+        { id: 'roi_cost', q: 'Cost of pain articulated', hint: 'In their words, with examples',
+          notePlaceholder: 'specific costs they named',
+          questions: [
+            'What does this cost you?',
+            'What is the impact when this happens?',
+            'What breaks downstream when training does not stick?',
+          ],
+          listen: 'Specific impact stories. Emotional weight. Downstream effects.',
+          captured: 'They described the cost in their own words, not you for them.',
+        },
+        { id: 'roi_annual', q: 'Annual dollar ballpark', hint: 'The most-skipped question',
+          notePlaceholder: '$ figure from them',
+          questions: [
+            'Even ballpark, what do you think this costs you in a year?',
+            'Time, money, errors, lost deals, turnover. Which bucket hurts most?',
+            'If you had to put a number on it, what would it be?',
+          ],
+          listen: 'The pause before they answer. A specific number, or push gently if they freeze.',
+          captured: 'A dollar figure, even rough, from them. Not from you.',
+        },
+        { id: 'roi_budget', q: 'Budget signal read', hint: 'Can they actually buy?',
+          notePlaceholder: 'state + owner name',
+          questions: [
+            'When you bring tools like this in, where does budget typically come from?',
+            'Is this something you have budget for, or would you need to build a case?',
+            'Who controls budget for tools like this?',
+          ],
+          listen: 'Allocated / pending / building case / no convo yet. Budget owner name.',
+          captured: 'Which of four states + name for who owns the budget.',
+        },
+      ],
+    },
+  ];
+
+  const PRESSURE = [
+    { id: 'q1', t: 'Training pain exists (inconsistent, informal, varies)' },
+    { id: 'q2', t: 'Ramp time is non-trivial (weeks/months, not days)' },
+    { id: 'q3', t: 'Proof is weak or manual' },
+    { id: 'q4', t: 'Training happens at scale (continuous)' },
+    { id: 'q5', t: 'Frontline reality fits (mobile-first matters)' },
+    { id: 'q6', t: 'Hands-on is core, with acknowledged limits' },
+    { id: 'q7', t: 'Clear operational owner or path' },
+    { id: 'q8', t: 'Operational urgency exists' },
+    { id: 'q9', t: 'Adoption feasible (open to hybrid)' },
+    { id: 'q10', t: 'Economic reality plausible (not a flat no)' },
+  ];
+
+  const FLAGS = [
+    { id: 'f1', t: 'Single-threaded (only one person)' },
+    { id: 'f2', t: 'Champion went quiet between calls' },
+    { id: 'f3', t: 'New late-stage stakeholder appeared' },
+    { id: 'f4', t: 'Timing slips with no new reason' },
+    { id: 'f5', t: "Can't articulate cost of doing nothing" },
+    { id: 'f6', t: 'Pricing came up before ROI was anchored' },
+    { id: 'f7', t: 'No materials shared after Call 1' },
+    { id: 'f8', t: 'Decision process keeps changing' },
+    { id: 'f9', t: 'No internal owner with urgency' },
+  ];
+
+  // ============================================
+  // STATE
+  // ============================================
+  function freshState() {
+    const s = { items: {}, notes: {}, pressure: {}, flags: {}, name: '', mode: 'track', showCovered: false };
+    BUCKETS.forEach(b => b.items.forEach(i => {
+      s.items[i.id] = false;
+      s.notes[i.id] = '';
+    }));
+    PRESSURE.forEach(p => s.pressure[p.id] = false);
+    FLAGS.forEach(f => s.flags[f.id] = false);
+    return s;
+  }
+
+  let state = freshState();
+  let saveTimer = null;
+  let activeNoteId = null;
+
+  // ============================================
+  // STORAGE - window.storage in Claude, localStorage anywhere else
+  // ============================================
+  const KEY_PREFIX = 'quinn_deal:';
+  const dealKey = name => KEY_PREFIX + name.toLowerCase().trim().replace(/\s+/g, '_');
+  const hasArtifactStorage = typeof window !== 'undefined' && window.storage && typeof window.storage.set === 'function';
+
+  const storage = {
+    async get(key) {
+      if (hasArtifactStorage) {
+        try { return await window.storage.get(key); } catch (e) { return null; }
+      }
+      const v = localStorage.getItem(key);
+      return v != null ? { key, value: v } : null;
+    },
+    async set(key, value) {
+      if (hasArtifactStorage) {
+        return window.storage.set(key, value);
+      }
+      localStorage.setItem(key, value);
+      return { key, value };
+    },
+    async list(prefix) {
+      if (hasArtifactStorage) {
+        try { return await window.storage.list(prefix); } catch (e) { return { keys: [] }; }
+      }
+      const keys = [];
+      for (let i = 0; i < localStorage.length; i++) {
+        const k = localStorage.key(i);
+        if (k && k.startsWith(prefix)) keys.push(k);
+      }
+      return { keys, prefix };
+    },
+    async delete(key) {
+      if (hasArtifactStorage) {
+        return window.storage.delete(key);
+      }
+      localStorage.removeItem(key);
+      return { key, deleted: true };
+    }
+  };
+
+  async function saveState() {
+    const name = state.name.trim();
+    if (!name) return;
+    try {
+      await storage.set(dealKey(name), JSON.stringify(state));
+      flashSaved();
+    } catch (e) { console.warn('save failed', e); }
+  }
+
+  function debouncedSave() {
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(saveState, 400);
+  }
+
+  async function loadDeal(name) {
+    if (!name) {
+      const mode = state.mode;
+      state = freshState();
+      state.mode = mode;
+      document.getElementById('dealName').value = '';
+      render();
+      return;
+    }
+    try {
+      const result = await storage.get(dealKey(name));
+      const mode = state.mode;
+      if (result && result.value) {
+        const loaded = JSON.parse(result.value);
+        // ensure notes structure exists for backward compat
+        if (!loaded.notes) loaded.notes = {};
+        BUCKETS.forEach(b => b.items.forEach(i => {
+          if (loaded.notes[i.id] === undefined) loaded.notes[i.id] = '';
+        }));
+        state = loaded;
+        state.name = name;
+        if (!state.mode) state.mode = mode;
+      } else {
+        state = freshState();
+        state.name = name;
+        state.mode = mode;
+      }
+    } catch (e) {
+      state = freshState();
+      state.name = name;
+    }
+    document.getElementById('dealName').value = name;
+    render();
+  }
+
+  async function refreshDealList() {
+    try {
+      const result = await storage.list(KEY_PREFIX);
+      const sel = document.getElementById('dealSelect');
+      const current = sel.value;
+      sel.innerHTML = '<option value="">LOAD DEAL</option>';
+      if (result && result.keys) {
+        result.keys.forEach(k => {
+          const name = k.replace(KEY_PREFIX, '').replace(/_/g, ' ');
+          const opt = document.createElement('option');
+          opt.value = name;
+          opt.textContent = name.toUpperCase();
+          sel.appendChild(opt);
+        });
+      }
+      sel.value = current;
+    } catch (e) {}
+  }
+
+  function flashSaved() {
+    const tag = document.getElementById('savedTag');
+    tag.textContent = 'SAVED';
+    tag.classList.add('live');
+    clearTimeout(flashSaved._t);
+    flashSaved._t = setTimeout(() => {
+      tag.textContent = state.name ? 'AUTO-SAVE ON' : '';
+      tag.classList.remove('live');
+    }, 1200);
+  }
+
+  // ============================================
+  // RENDER
+  // ============================================
+  function render() {
+    document.querySelectorAll('.mode-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.mode === state.mode);
+    });
+
+    if (state.mode === 'track') {
+      document.getElementById('trackView').style.display = '';
+      document.getElementById('prepView').style.display = 'none';
+      renderGrid();
+      renderPressure();
+      renderFlags();
+    } else {
+      document.getElementById('trackView').style.display = 'none';
+      document.getElementById('prepView').style.display = '';
+      renderPrep();
+    }
+
+    renderCoverage();
+    renderSavedTag();
+
+    // restore focus if we were editing a note
+    if (activeNoteId) {
+      const el = document.querySelector(`[data-note-id="${activeNoteId}"]`);
+      if (el) {
+        el.focus();
+        const len = el.value.length;
+        el.setSelectionRange(len, len);
+      }
+    }
+  }
+
+  function autosize(el) {
+    if (document.activeElement === el) {
+      el.style.height = 'auto';
+      el.style.height = Math.max(70, el.scrollHeight) + 'px';
+    } else {
+      el.style.height = '';
+    }
+  }
+
+  function renderGrid() {
+    const grid = document.getElementById('grid');
+    grid.innerHTML = '';
+    BUCKETS.forEach(bucket => {
+      const covered = bucket.items.filter(i => state.items[i.id]).length;
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <div class="card-head">
+          <span class="card-title">${bucket.title}</span>
+          <span class="card-num">${covered}/${bucket.items.length}</span>
+        </div>
+        <div class="card-sub">${bucket.sub}</div>
+        <div class="items">
+          ${bucket.items.map(item => {
+            const note = state.notes[item.id] || '';
+            const noteClass = note ? 'has-content' : '';
+            return `
+              <div class="item ${state.items[item.id] ? 'covered' : ''}">
+                <div class="item-mark" data-toggle="${item.id}"></div>
+                <div class="item-body">
+                  <div class="item-q" data-toggle="${item.id}">${item.q}</div>
+                  <div class="item-hint">${item.hint}</div>
+                  <textarea class="note ${noteClass}"
+                    data-note-id="${item.id}"
+                    placeholder="${item.notePlaceholder}"
+                    rows="1">${escapeHtml(note)}</textarea>
+                </div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+
+    attachItemEvents(grid);
+    attachNoteEvents(grid);
+  }
+
+  function attachItemEvents(scope) {
+    scope.querySelectorAll('[data-toggle]').forEach(el => {
+      el.addEventListener('click', () => {
+        const id = el.dataset.toggle;
+        state.items[id] = !state.items[id];
+        render();
+        debouncedSave();
+      });
+    });
+  }
+
+  function attachNoteEvents(scope) {
+    scope.querySelectorAll('[data-note-id]').forEach(el => {
+      el.addEventListener('focus', () => {
+        activeNoteId = el.dataset.noteId;
+        autosize(el);
+      });
+      el.addEventListener('blur', () => {
+        activeNoteId = null;
+        el.style.height = '';
+      });
+      el.addEventListener('input', () => {
+        const id = el.dataset.noteId;
+        state.notes[id] = el.value;
+        if (el.value) el.classList.add('has-content');
+        else el.classList.remove('has-content');
+        autosize(el);
+        debouncedSave();
+      });
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') el.blur();
+      });
+    });
+  }
+
+  function renderPressure() {
+    const wrap = document.getElementById('qualList');
+    wrap.innerHTML = PRESSURE.map(p => `
+      <div class="check-row ${state.pressure[p.id] ? 'checked' : ''}" data-pid="${p.id}">
+        <div class="item-mark"></div>
+        <div class="check-text">${p.t}</div>
+      </div>
+    `).join('');
+
+    wrap.querySelectorAll('.check-row').forEach(el => {
+      el.addEventListener('click', () => {
+        state.pressure[el.dataset.pid] = !state.pressure[el.dataset.pid];
+        render();
+        debouncedSave();
+      });
+    });
+
+    const score = PRESSURE.filter(p => state.pressure[p.id]).length;
+    const meta = document.getElementById('qualMeta');
+    meta.textContent = `${score} / 10 (pass at 7+)`;
+    meta.className = 'panel-meta ' + (score >= 7 ? 'ok' : score >= 4 ? '' : 'warn');
+  }
+
+  function renderFlags() {
+    const wrap = document.getElementById('flagList');
+    wrap.innerHTML = FLAGS.map(f => `
+      <div class="check-row flag ${state.flags[f.id] ? 'checked' : ''}" data-fid="${f.id}">
+        <div class="item-mark"></div>
+        <div class="check-text">${f.t}</div>
+      </div>
+    `).join('');
+
+    wrap.querySelectorAll('.check-row').forEach(el => {
+      el.addEventListener('click', () => {
+        state.flags[el.dataset.fid] = !state.flags[el.dataset.fid];
+        render();
+        debouncedSave();
+      });
+    });
+
+    const count = FLAGS.filter(f => state.flags[f.id]).length;
+    document.getElementById('flagMeta').textContent = count === 0 ? '0 flagged' : count === 1 ? '1 flagged' : `${count} flagged (deal at risk)`;
+  }
+
+  function renderPrep() {
+    const dealLabel = state.name ? state.name.toUpperCase() : 'NO DEAL SELECTED';
+    document.getElementById('prepTitle').textContent = `CALL PREP // ${dealLabel}`;
+
+    const total = BUCKETS.reduce((n, b) => n + b.items.length, 0);
+    const covered = Object.values(state.items).filter(Boolean).length;
+    const open = total - covered;
+    document.getElementById('prepMeta').innerHTML = open === 0
+      ? `<strong>All ${total} items captured.</strong> If accurate, you are ready to close.`
+      : `<strong>${open} items still open</strong> of ${total}. Notes from previous calls show inline.`;
+
+    document.getElementById('showCovered').checked = !!state.showCovered;
+
+    const body = document.getElementById('prepBody');
+
+    if (open === 0 && !state.showCovered) {
+      body.innerHTML = `<div class="prep-empty"><strong>NOTHING TO ASK</strong>Every capture is filled. Toggle "Show items already captured" to review your notes.</div>`;
+      return;
+    }
+
+    body.innerHTML = BUCKETS.map(bucket => {
+      const items = bucket.items.filter(i => state.showCovered || !state.items[i.id]);
+      if (items.length === 0) return '';
+      return `
+        <div class="prep-bucket">
+          <div class="prep-bucket-head">${bucket.title}</div>
+          ${items.map(item => {
+            const note = state.notes[item.id] || '';
+            const isCovered = state.items[item.id];
+            return `
+              <div class="prep-item ${isCovered ? 'covered' : ''}">
+                <div class="prep-item-head">
+                  <div class="prep-item-title">${item.q}</div>
+                  <button class="prep-item-toggle" data-toggle="${item.id}">${isCovered ? 'CAPTURED' : 'MARK CAPTURED'}</button>
+                </div>
+                ${note && isCovered ? `
+                  <div class="prep-section">
+                    <div class="prep-label">What you captured</div>
+                    <div class="prep-captured-note">${escapeHtml(note)}</div>
+                  </div>
+                ` : ''}
+                ${!isCovered ? `
+                  <div class="prep-section">
+                    <div class="prep-label">Ask</div>
+                    <ul class="prep-questions">
+                      ${item.questions.map(q => `<li>${q}</li>`).join('')}
+                    </ul>
+                  </div>
+                  <div class="prep-section">
+                    <div class="prep-label">Listen for</div>
+                    <div class="prep-listen">${item.listen}</div>
+                  </div>
+                  <div class="prep-section">
+                    <div class="prep-label">Captured =</div>
+                    <div class="prep-captured">${item.captured}</div>
+                  </div>
+                  <div class="prep-section">
+                    <div class="prep-label">${note ? 'Note (in progress)' : 'Note'}</div>
+                    <textarea class="prep-note"
+                      data-note-id="${item.id}"
+                      placeholder="${item.notePlaceholder}">${escapeHtml(note)}</textarea>
+                  </div>
+                ` : ''}
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
+    }).join('');
+
+    attachItemEvents(body);
+    attachNoteEvents(body);
+  }
+
+  function renderCoverage() {
+    const total = BUCKETS.reduce((n, b) => n + b.items.length, 0);
+    const covered = Object.values(state.items).filter(Boolean).length;
+    const pct = Math.round((covered / total) * 100);
+    document.getElementById('coverFill').style.width = pct + '%';
+    document.getElementById('coverNum').textContent = `${covered} / ${total}`;
+  }
+
+  function renderSavedTag() {
+    const tag = document.getElementById('savedTag');
+    if (state.name && state.name.trim()) {
+      tag.textContent = 'AUTO-SAVE ON';
+      tag.classList.remove('live');
+    } else {
+      tag.textContent = 'NO DEAL (state not saved)';
+      tag.classList.remove('live');
+    }
+  }
+
+  function escapeHtml(str) {
+    return String(str || '').replace(/[&<>"']/g, c => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[c]));
+  }
+
+  // ============================================
+  // EVENTS
+  // ============================================
+  document.querySelectorAll('.mode-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.mode = btn.dataset.mode;
+      render();
+      debouncedSave();
+    });
+  });
+
+  document.getElementById('dealName').addEventListener('input', (e) => {
+    state.name = e.target.value;
+    renderSavedTag();
+    debouncedSave();
+  });
+
+  document.getElementById('dealName').addEventListener('blur', async () => {
+    if (state.name.trim()) await refreshDealList();
+  });
+
+  document.getElementById('dealSelect').addEventListener('change', async (e) => {
+    const name = e.target.value;
+    if (name) {
+      await loadDeal(name);
+      await refreshDealList();
+    }
+  });
+
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    if (confirm('Reset all fields and notes? This clears the current view only. Saved deals are untouched.')) {
+      const currentName = state.name;
+      const currentMode = state.mode;
+      state = freshState();
+      state.name = currentName;
+      state.mode = currentMode;
+      render();
+      if (currentName.trim()) debouncedSave();
+    }
+  });
+
+  document.getElementById('printBtn').addEventListener('click', () => {
+    if (state.mode !== 'prep') {
+      state.mode = 'prep';
+      render();
+      setTimeout(() => window.print(), 200);
+    } else {
+      window.print();
+    }
+  });
+
+  document.addEventListener('change', (e) => {
+    if (e.target && e.target.id === 'showCovered') {
+      state.showCovered = e.target.checked;
+      renderPrep();
+      debouncedSave();
+    }
+  });
+
+  // ============================================
+  // DEMO DEAL - realistic sample data for sharing
+  // ============================================
+  const DEMO_DEAL = {
+    name: 'Blue Ridge HVAC (DEMO)',
+    mode: 'track',
+    showCovered: false,
+    items: {
+      pain_types: true,
+      pain_where: true,
+      pain_break: true,
+      size_count: true,
+      size_scope: true,
+      path_approver: true,
+      path_champion: true,
+      path_others: false,
+      path_steps: false,
+      needs_must: true,
+      needs_break: true,
+      needs_status: true,
+      roi_cost: true,
+      roi_annual: false,
+      roi_budget: false,
+    },
+    notes: {
+      pain_types: 'No formal training infrastructure. Ride-along bottleneck (only 2 senior techs). 4 branches running different SOPs. Mostly tribal.',
+      pain_where: '60-day shadow program with whoever is on shift. New techs ride with Steve mostly because he is most patient. Then assigned a route.',
+      pain_break: 'Week 3-4 when they hit unfamiliar systems. They call dispatch, which interrupts senior techs on jobs. Cascading delays.',
+      size_count: '180 techs across 4 branches. Hiring 12-15/quarter. Ramping to 20+ next year for new locations.',
+      size_scope: '4 branches in NC/SC. Mark wants 2 more in 2026. CSRs need training too but secondary.',
+      path_approver: 'Mark Schmidt, COO. Hands-on but reasonable per Sarah. Need him in the demo.',
+      path_champion: 'Sarah Tellez, Director of Training. STRONG. Has been pushing for a solution 6+ months. Owns L&D budget. Mark approves anything >$25k.',
+      path_others: '',
+      path_steps: '',
+      needs_must: '1. Mobile-first (techs on phones, not laptops)\n2. Reporting on who completed what training\n3. Spanish language support for ~30% of new hires',
+      needs_break: 'No mandatory login per tech. Tried Trainual 2 yrs ago and it failed because no one would log in. This is THE landmine.',
+      needs_status: 'Currently nothing formal. Trainual failed. Looked at LearnUpon last year, too expensive. Mostly competing with do-nothing.',
+      roi_cost: 'Ride-along time eats $40-50k/yr in senior tech billable hours. Plus 25% turnover in year one means lost productivity on new hires.',
+      roi_annual: '',
+      roi_budget: '',
+    },
+    pressure: {
+      q1: true, q2: true, q3: true, q4: true, q5: true,
+      q6: true, q7: false, q8: true, q9: true, q10: false,
+    },
+    flags: {
+      f1: false, f2: false, f3: false, f4: false, f5: false,
+      f6: false, f7: false, f8: false, f9: true,
+    },
+  };
+
+  document.getElementById('demoBtn').addEventListener('click', async () => {
+    state = JSON.parse(JSON.stringify(DEMO_DEAL));
+    document.getElementById('dealName').value = state.name;
+    await saveState();
+    await refreshDealList();
+    render();
+  });
+
+  // INIT
+  render();
+  refreshDealList();
+</script>
