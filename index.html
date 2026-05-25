@@ -378,6 +378,414 @@
   .check-row .check-text { font-size: 11px; line-height: 1.45; color: var(--text-dim); }
   .check-row.checked .check-text { color: var(--warn); }
 
+  /* ============= DEMO TAB ============= */
+  .demo {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 24px 28px;
+  }
+  .demo-head { margin-bottom: 20px; }
+  .demo-h1 {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .demo-meta {
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
+    line-height: 1.6;
+  }
+  .pain-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 12px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    margin-bottom: 18px;
+  }
+  .pain-btn {
+    background: transparent;
+    color: var(--text-dim);
+    border: 1px solid var(--border-strong);
+    padding: 8px 14px;
+    font-family: inherit;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .pain-btn:hover {
+    color: var(--text);
+    border-color: var(--accent);
+  }
+  .pain-btn.active {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+  }
+  .pain-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    padding: 22px 24px;
+  }
+  .pain-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+  }
+  .pain-goal {
+    font-size: 12px;
+    color: var(--text);
+    line-height: 1.6;
+    padding-bottom: 16px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid var(--border);
+  }
+  .pain-section-h {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+    margin-bottom: 10px;
+    padding-top: 4px;
+  }
+  .pain-section-h.probes { color: var(--text-dim); }
+  .pain-q {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.55;
+    padding: 8px 0 8px 14px;
+    border-left: 2px solid var(--accent-dim);
+    margin-bottom: 8px;
+    font-style: italic;
+  }
+  .pain-q.probe {
+    border-left-color: var(--border-strong);
+    color: var(--text-dim);
+    font-size: 12px;
+  }
+  .pain-capture {
+    margin-top: 18px;
+    padding: 10px 12px;
+    background: var(--surface);
+    border-left: 2px solid var(--ok);
+    font-size: 11px;
+    color: var(--text);
+    letter-spacing: 0.04em;
+  }
+  .pain-capture-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    color: var(--ok);
+    margin-right: 8px;
+  }
+
+  /* ============= DASHBOARD ============= */
+  .dash {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 24px 28px;
+  }
+  .dash-head { margin-bottom: 18px; }
+  .dash-h1 {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .dash-meta {
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
+  }
+  .dash-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 22px;
+    padding: 16px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+  }
+  .stat {
+    text-align: center;
+  }
+  .stat-num {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.1;
+    margin-bottom: 4px;
+  }
+  .stat-num.won { color: var(--ok); }
+  .stat-num.lost { color: var(--warn); }
+  .stat-num.rate { color: var(--accent); }
+  .stat-label {
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--text-dim);
+    letter-spacing: 0.16em;
+  }
+  .dash-section {
+    margin-bottom: 22px;
+  }
+  .dash-section-h {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    color: var(--accent);
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .dash-section-h.won { color: var(--ok); }
+  .dash-section-h.lost { color: var(--warn); }
+  .dash-empty {
+    font-size: 11px;
+    color: var(--text-faint);
+    font-style: italic;
+    padding: 12px 0;
+  }
+  .deal-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr auto;
+    gap: 12px;
+    align-items: center;
+    padding: 12px 14px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    margin-bottom: 6px;
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+  .deal-row:hover { border-color: var(--accent); }
+  .deal-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: 0.04em;
+  }
+  .deal-meta {
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
+  }
+  .deal-coverage {
+    font-size: 11px;
+    color: var(--text-dim);
+    font-weight: 600;
+  }
+  .deal-flags {
+    font-size: 10px;
+    color: var(--warn);
+    letter-spacing: 0.06em;
+  }
+  .deal-actions {
+    display: flex;
+    gap: 6px;
+  }
+  .deal-action {
+    background: transparent;
+    border: 1px solid var(--border-strong);
+    color: var(--text-dim);
+    font-family: inherit;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    padding: 4px 8px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .deal-action:hover { color: var(--accent); border-color: var(--accent); }
+  .deal-action.won:hover { color: var(--ok); border-color: var(--ok); }
+  .deal-action.lost:hover { color: var(--warn); border-color: var(--warn); }
+  .deal-action.reactivate:hover { color: var(--accent); border-color: var(--accent); }
+  .deal-reason {
+    grid-column: 1 / -1;
+    font-size: 11px;
+    color: var(--text-dim);
+    font-style: italic;
+    padding-top: 6px;
+    margin-top: 6px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* ============= PROPOSAL ============= */
+  .proposal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 24px 28px;
+  }
+  .prop-head { margin-bottom: 18px; }
+  .prop-h1 {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .prop-meta {
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
+    line-height: 1.6;
+  }
+  .prop-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    padding: 18px 22px;
+    margin-bottom: 12px;
+  }
+  .prop-card-h {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+  }
+  .prop-card-sub {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-bottom: 12px;
+    letter-spacing: 0.04em;
+  }
+  .prop-q {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.55;
+    padding: 6px 0 6px 14px;
+    border-left: 2px solid var(--accent-dim);
+    margin-bottom: 6px;
+    font-style: italic;
+  }
+  .prop-list {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.6;
+    padding-left: 18px;
+    margin: 4px 0;
+  }
+  .prop-list li {
+    padding: 4px 0;
+  }
+  .obj-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 14px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 12px;
+    align-items: start;
+  }
+  .obj-row:last-child { border-bottom: none; }
+  .obj-objection {
+    color: var(--text);
+    font-weight: 600;
+  }
+  .obj-response {
+    color: var(--text-dim);
+    line-height: 1.55;
+  }
+
+  /* ============= PLAYBOOK ============= */
+  .playbook {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 24px 28px;
+  }
+  .pb-head { margin-bottom: 18px; }
+  .pb-h1 {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .pb-meta {
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
+  }
+  .pb-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 18px 22px;
+    margin-bottom: 12px;
+  }
+  .pb-card.danger { border-left: 3px solid var(--warn); }
+  .pb-card.move { border-left: 3px solid var(--accent); }
+  .pb-card.comp { border-left: 3px solid var(--ok); }
+  .pb-card-h {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    margin-bottom: 10px;
+  }
+  .pb-card.danger .pb-card-h { color: var(--warn); }
+  .pb-card.move .pb-card-h { color: var(--accent); }
+  .pb-card.comp .pb-card-h { color: var(--ok); }
+  .pb-item {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.55;
+    padding: 6px 0 6px 16px;
+    position: relative;
+  }
+  .pb-item::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--text-faint);
+  }
+  .pb-item.danger::before { content: "✕"; color: var(--warn); }
+  .pb-script {
+    font-size: 12px;
+    font-style: italic;
+    color: var(--text-dim);
+    padding: 6px 0 6px 14px;
+    border-left: 2px solid var(--border-strong);
+    margin: 6px 0;
+    line-height: 1.55;
+  }
+  .pb-move-name {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-top: 12px;
+    margin-bottom: 4px;
+  }
+  .pb-move-name:first-child { margin-top: 0; }
+  .pb-comp-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 12px;
+    align-items: baseline;
+  }
+  .pb-comp-row:last-child { border-bottom: none; }
+  .pb-comp-name {
+    font-weight: 700;
+    color: var(--ok);
+    letter-spacing: 0.04em;
+  }
+  .pb-comp-use {
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+
   /* ============= MISC / LEGACY DATA ============= */
   .misc-card {
     background: var(--bg);
@@ -451,9 +859,13 @@
   <input type="text" class="deal-input" id="dealName" placeholder="Deal name" autocomplete="off">
   <span class="saved-tag" id="savedTag"></span>
   <div class="mode-switch">
+    <button class="mode-btn" data-mode="deals">DEALS</button>
     <button class="mode-btn active" data-mode="gates">GATES</button>
     <button class="mode-btn" data-mode="track">TRACK</button>
     <button class="mode-btn" data-mode="prep">PREP</button>
+    <button class="mode-btn" data-mode="demo">DEMO</button>
+    <button class="mode-btn" data-mode="proposal">PROPOSAL</button>
+    <button class="mode-btn" data-mode="playbook">PLAYBOOK</button>
   </div>
   <div class="topbar-actions">
     <select class="btn" id="dealSelect">
@@ -514,6 +926,48 @@
   </div>
 </div>
 
+<div id="demoView" style="display:none">
+  <div class="demo">
+    <div class="demo-head">
+      <div class="demo-h1" id="demoTitle">DEMO PREP</div>
+      <div class="demo-meta">Dig deeper on the friction they named in Call 1, BEFORE you show anything. Pick the pain category they surfaced. Run the 3 must-asks first.</div>
+    </div>
+    <div class="pain-selector" id="painSelector"></div>
+    <div id="painBody"></div>
+  </div>
+</div>
+
+<div id="dealsView" style="display:none">
+  <div class="dash">
+    <div class="dash-head">
+      <div class="dash-h1">DEALS DASHBOARD</div>
+      <div class="dash-meta">All deals across active, won, and lost. Click a deal to load it.</div>
+    </div>
+    <div class="dash-stats" id="dashStats"></div>
+    <div id="dashBody"></div>
+  </div>
+</div>
+
+<div id="proposalView" style="display:none">
+  <div class="proposal">
+    <div class="prop-head">
+      <div class="prop-h1" id="proposalTitle">PROPOSAL CALL PREP</div>
+      <div class="prop-meta">Remove every reason to delay. Pricing tied to ROI math they accepted in Demo. Multi-thread the room. End with verbal yes and signature path.</div>
+    </div>
+    <div id="proposalBody"></div>
+  </div>
+</div>
+
+<div id="playbookView" style="display:none">
+  <div class="playbook">
+    <div class="pb-head">
+      <div class="pb-h1">PLAYBOOK</div>
+      <div class="pb-meta">Reference content. Anti-patterns, guarded prospect moves, customer comps, forcing function.</div>
+    </div>
+    <div id="playbookBody"></div>
+  </div>
+</div>
+
 <div class="footer">Quinn Call Deck. Auto-saves per deal. GATES = required to advance to demo. TRACK = everything. EXPORT often.</div>
 
 <script>
@@ -527,25 +981,27 @@
         {
           id: 'pain_statement',
           q: 'Pain statement',
-          hint: '[Prospect] is losing [outcome] because [root cause]',
+          hint: 'Layer 1 (process) and Layer 2 (friction). Prospect-led, in their own words.',
           notePlaceholder: 'e.g. Blue Ridge is losing senior tech billable hours because new techs require 60-day ride-along ramp',
           questions: [
-            'Walk me through how you train someone new today, start to finish.',
-            'What is the most expensive part of how you train today?',
-            'If you could wave a wand and fix one thing about this, what would it be?',
+            'Walk me through how a new tech gets trained at one of your branches.',
+            'Got it. When you describe that, which part of it is not working as well as you would like?',
+            'If you could wave a wand and change one thing about that process, what would it be?',
+            'Where does it tend to break down?',
           ],
-          listen: 'Specific operational consequences. Named processes that break. Tribal knowledge gaps. Emotional weight at the friction point.',
-          captured: 'You can complete the sentence: "[Company] is losing [X] because [Y]."',
+          listen: 'Specific operational consequences. Named processes that break. Tribal knowledge gaps. Emotional weight at the friction point. Avoid naming the pain for them.',
+          captured: 'They named the friction in their own words. You can complete: "[Company] is losing [X] because [Y]."',
         },
         {
           id: 'pain_quantified',
           q: 'Pain quantified or quantification path',
-          hint: 'Annual cost OR enough math ingredients to calculate next call',
+          hint: 'Layer 3. They own the number. Only ask after they have named the friction.',
           notePlaceholder: 'e.g. ~$120k/yr OR 8 callbacks/wk @ $150 each + 25% turnover replacement cost',
           questions: [
-            'Even ballpark, what do you think this costs you in a year?',
-            'What goes into that? Callback frequency and cost-per, new hire ramp time, turnover replacement, productivity gap?',
-            'If you had to put a number on it, what would it be?',
+            'How often does that happen?',
+            'What does it cost you when it does?',
+            'Is it getting better, worse, or about the same?',
+            'Even ballpark, what does this cost you in a year?',
           ],
           listen: 'Specific numbers, even rough. Frequency + cost-per-incident pattern. Time + dollar-value-of-time pattern. The pause before they answer.',
           captured: 'A dollar figure (rough is fine) OR enough math ingredients you can calculate it before Call 2.',
@@ -571,15 +1027,16 @@
         {
           id: 'current_system',
           q: 'Current system',
-          hint: 'LMS in place, training process, or "None"',
+          hint: 'LMS in place, training process, or "None". Includes Replace/Add/SCORM read.',
           notePlaceholder: 'e.g. None formal. Tried Trainual 2 yrs ago, failed. Mostly ride-along + tribal.',
           questions: [
-            'What does training look like today, formal or informal?',
-            'Anything in place currently, or starting from scratch?',
+            'What does training look like today: LMS, ride-alongs, refresher courses?',
+            'How is that working for you?',
+            'Are you in a position to replace it, or layer capability around it?',
             'Have you tried tools like this before? What happened?',
           ],
-          listen: 'Specific LMS names. "We tried X." Informal processes. Past failures and why.',
-          captured: 'Specific tool name, process description, or explicit "None."',
+          listen: 'Specific LMS names. "We tried X." Informal processes. Past failures and why. Replace/Add/SCORM-only signal.',
+          captured: 'Specific tool name (or "None") + Replace / Add / SCORM-only orientation.',
         },
       ],
     },
@@ -606,10 +1063,10 @@
           notePlaceholder: 'e.g. Mark Schmidt, COO. Approves anything over $25k. Sarah owns L&D budget below that.',
           questions: [
             'Beyond yourself, who else weighs in on a decision like this?',
+            'Is there a budget threshold that triggers their involvement?',
             'If you wanted to bring this in, what would that take?',
-            'What does the approval process look like for a tool like this?',
           ],
-          listen: '"I would need to run it by..." Specific titles with budget authority. Hesitation about their own authority.',
+          listen: '"I would need to run it by..." Specific titles with budget authority. Hesitation about their own authority. If you are talking to HR/CHRO/CLO instead of VP Ops/COO/Training Director, you are off-shape.',
           captured: 'Named person + title + sign-off threshold or path to them.',
         },
         {
@@ -702,9 +1159,12 @@
           q: 'Compelling event',
           hint: 'Hiring push, expansion, seasonality, compliance deadline, leadership initiative',
           notePlaceholder: 'e.g. Opening 2 new branches Q2, need to scale training fast',
-          questions: ['Why now? What is driving this conversation today?'],
-          listen: 'Time-bound events. Specific deadlines. Recent organizational changes.',
-          captured: 'A specific trigger, or honest "no compelling event."',
+          questions: [
+            'Why now? What is driving this conversation today?',
+            'If you do not solve this in 6 months, what gets worse?',
+          ],
+          listen: 'Time-bound events. Specific deadlines. Recent organizational changes. Specific event + timing = strong. No event = deal stalls.',
+          captured: 'A specific trigger + timing, or honest "no compelling event."',
         },
       ],
     },
@@ -722,6 +1182,105 @@
     { id: 'rf_1000plus', t: '1,000+ employee opportunity (route to Arlen)' },
   ];
 
+  // Demo phase pain categories with deep-dig questions
+  const DEMO_PAINS = [
+    {
+      id: 'time-to-solo',
+      title: 'TIME-TO-SOLO',
+      subtitle: 'New tech ramp · senior tech opportunity cost · lost billable hours',
+      goal: 'Surface the hidden cost of slow ramp. Senior tech opportunity cost, lost billable hours, ride-along bottleneck.',
+      mustAsk: [
+        'Last time you said it takes [X weeks] before a new tech is solo. Walk me through what is actually happening during those weeks. What does a senior tech\'s day look like when they are carrying a new hire?',
+        'When you have tried to compress that timeline, what breaks first? Quality, safety, callbacks, or just senior tech bandwidth?',
+        'If a new tech went solo two weeks earlier than they do today, what would that be worth to you per hire?',
+      ],
+      probes: [
+        'How many new techs are you onboarding in the next 12 months?',
+        'What is a senior tech\'s loaded hourly rate when they are not on a billable job?',
+        'Are some senior techs better at training than others? What happens when the good ones are unavailable?',
+        'Have you ever had a new tech go solo too early? What happened?',
+        'Where is the bottleneck: finding senior techs willing to train, or the content itself?',
+      ],
+      capture: 'Weeks to solo + senior tech rate + # of new hires + named bottleneck',
+    },
+    {
+      id: 'callbacks',
+      title: 'CALLBACKS / REWORK',
+      subtitle: 'Quality issues · truck rolls · customer satisfaction',
+      goal: 'Tie callbacks to training quality. Find the per-callback dollar cost. Surface the customer-satisfaction angle.',
+      mustAsk: [
+        'You mentioned [X%] of jobs come back. When you break those down, how many trace back to a tech doing something wrong on the first visit vs. something genuinely outside their control?',
+        'Walk me through a typical callback. Start with the customer call. What does the next 48 hours look like operationally?',
+        'What does one callback cost you all-in? Truck roll, tech time, the customer-relationship piece.',
+      ],
+      probes: [
+        'Are callbacks concentrated in newer techs, or spread evenly across the team?',
+        'Do you see patterns by job type (install, service, repair) or is it scattered?',
+        'How many of your callbacks become review or complaint issues vs. quietly absorbed?',
+        'What is your current process for coaching after a callback? Does it actually change behavior?',
+        'Have you ever lost a contract or customer because of a callback pattern?',
+      ],
+      capture: 'Callback rate + training-attributable % + per-callback cost + customer impact',
+    },
+    {
+      id: 'turnover',
+      title: 'TURNOVER',
+      subtitle: 'First-90-day attrition · replacement cost · onboarding quality',
+      goal: 'Surface true replacement cost and tie turnover to onboarding experience, not just compensation.',
+      mustAsk: [
+        'You said you are losing techs in the first [90 days / season]. When someone quits in that window, what reason do they typically give, and what do you suspect the real reason is?',
+        'Walk me through what it costs to lose one new tech. Recruiting, signing bonus, equipment, training time, ramp time. What am I missing?',
+        'What is different about the techs who stick past 90 days vs. the ones who do not?',
+      ],
+      probes: [
+        'Are you losing them to competitors, other industries, or are they leaving the trade entirely?',
+        'How much does the onboarding experience itself factor in? Have you done exit interviews?',
+        'Do certain managers or branches retain better than others? Why?',
+        'What is your current first-week experience for a new tech? What are the first three things they touch?',
+        'If you could change one thing about week one or month one, what would it be?',
+      ],
+      capture: 'Turnover % + all-in replacement cost + retention pattern + week-1 experience',
+    },
+    {
+      id: 'branch',
+      title: 'BRANCH CONSISTENCY',
+      subtitle: 'Territory variance · quality drift · visibility gaps',
+      goal: 'Name the variance. Find the cost of inconsistency. Surface the visibility problem.',
+      mustAsk: [
+        'You mentioned [Branch X] runs tight and others drift. Take me deeper on that. What specifically do you see at the drifting branches that you do not see at the strong ones?',
+        'How do you find out when a branch is slipping? Customer complaints, callbacks, a regional manager flag, or do you only find out at quarterly reviews?',
+        'What does inconsistency cost you? Customer churn at weak branches, additional management time, the operational drag on standardizing.',
+      ],
+      probes: [
+        'Is the variance about the techs themselves, the branch managers, or local processes that drift over time?',
+        'When you have rolled out a new SOP or update, how do you confirm it actually landed at every branch?',
+        'How long does it take an operational change to show up at the weakest branch vs. the strongest?',
+        'Are you growing through acquisition? How do acquired branches typically integrate?',
+        'If you could see one dashboard that told you whether every branch is at the same standard, what would be on it?',
+      ],
+      capture: 'Named variance + detection method + dollar drag + dashboard ask',
+    },
+    {
+      id: 'content',
+      title: 'CONTENT BURDEN',
+      subtitle: 'Backlog · person stuck on content · update lag',
+      goal: 'Quantify the backlog and the opportunity cost of the person stuck doing content.',
+      mustAsk: [
+        'You said building content eats [name\'s] week. Walk me through what they were hired to do vs. what they are actually doing now.',
+        'What is on the training backlog right now that you have not gotten to? Things you have been meaning to build but have not had time.',
+        'When something operational changes (a new product, a new SOP, a safety update), how long until it shows up in training?',
+      ],
+      probes: [
+        'What does it look like to build one course today? Hours, tools, who is involved, how long start-to-finish?',
+        'If [name] got their week back, what would they actually work on instead?',
+        'Are managers building their own content informally to fill the gap? What does that look like?',
+        'How do you keep training up to date once it is built? Is anyone owning that?',
+        'What is the cost of the lag, when an SOP changes and training takes 3 months to catch up?',
+      ],
+      capture: 'Time per course + backlog size + lag time + name\'s opportunity cost',
+    },
+  ];
+
   // Flat list of all items for easy iteration
   const ALL_ITEMS = SECTIONS.flatMap(s => s.items.map(i => ({ ...i, section: s.id, gate: s.gate })));
   const GATE_ITEMS = ALL_ITEMS.filter(i => i.gate);
@@ -730,7 +1289,7 @@
   // STATE
   // ============================================
   function freshState() {
-    const s = { items: {}, notes: {}, flags: {}, name: '', mode: 'gates', showCovered: false };
+    const s = { items: {}, notes: {}, flags: {}, name: '', mode: 'gates', showCovered: false, demoPain: 'time-to-solo', status: 'active', statusDate: null, closeReason: '', createdAt: null, lastTouched: null };
     ALL_ITEMS.forEach(i => { s.items[i.id] = false; s.notes[i.id] = ''; });
     FLAGS.forEach(f => s.flags[f.id] = false);
     return s;
@@ -782,6 +1341,7 @@
   async function saveState() {
     const name = state.name.trim();
     if (!name) return;
+    state.lastTouched = new Date().toISOString();
     try {
       await storage.set(dealKey(name), JSON.stringify(state));
       flashSaved();
@@ -816,6 +1376,12 @@
           if (loaded.notes[i.id] === undefined) loaded.notes[i.id] = '';
         });
         FLAGS.forEach(f => { if (loaded.flags[f.id] === undefined) loaded.flags[f.id] = false; });
+        if (!loaded.demoPain) loaded.demoPain = 'time-to-solo';
+        if (!loaded.status) loaded.status = 'active';
+        if (loaded.statusDate === undefined) loaded.statusDate = null;
+        if (loaded.closeReason === undefined) loaded.closeReason = '';
+        if (!loaded.createdAt) loaded.createdAt = new Date().toISOString();
+        loaded.lastTouched = new Date().toISOString();
         state = loaded;
         state.name = name;
         if (!state.mode) state.mode = mode;
@@ -823,6 +1389,8 @@
         state = freshState();
         state.name = name;
         state.mode = mode;
+        state.createdAt = new Date().toISOString();
+        state.lastTouched = new Date().toISOString();
       }
     } catch (e) {
       state = freshState();
@@ -873,10 +1441,18 @@
     document.getElementById('gatesView').style.display = state.mode === 'gates' ? '' : 'none';
     document.getElementById('trackView').style.display = state.mode === 'track' ? '' : 'none';
     document.getElementById('prepView').style.display = state.mode === 'prep' ? '' : 'none';
+    document.getElementById('demoView').style.display = state.mode === 'demo' ? '' : 'none';
+    document.getElementById('dealsView').style.display = state.mode === 'deals' ? '' : 'none';
+    document.getElementById('proposalView').style.display = state.mode === 'proposal' ? '' : 'none';
+    document.getElementById('playbookView').style.display = state.mode === 'playbook' ? '' : 'none';
 
     if (state.mode === 'gates') renderGates();
     else if (state.mode === 'track') renderTrack();
     else if (state.mode === 'prep') renderPrep();
+    else if (state.mode === 'demo') renderDemo();
+    else if (state.mode === 'deals') renderDashboard();
+    else if (state.mode === 'proposal') renderProposal();
+    else if (state.mode === 'playbook') renderPlaybook();
 
     renderCoverage();
     renderSavedTag();
@@ -1178,6 +1754,381 @@
 
     attachItemEvents(body);
     attachNoteEvents(body);
+  }
+
+  function renderDemo() {
+    const dealLabel = state.name ? state.name.toUpperCase() : 'NO DEAL SELECTED';
+    document.getElementById('demoTitle').textContent = `DEMO PREP // ${dealLabel}`;
+
+    const selector = document.getElementById('painSelector');
+    selector.innerHTML = DEMO_PAINS.map(p => `
+      <button class="pain-btn ${state.demoPain === p.id ? 'active' : ''}" data-pain="${p.id}">${p.title}</button>
+    `).join('');
+
+    selector.querySelectorAll('[data-pain]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        state.demoPain = btn.dataset.pain;
+        render();
+        debouncedSave();
+      });
+    });
+
+    const pain = DEMO_PAINS.find(p => p.id === state.demoPain) || DEMO_PAINS[0];
+    const body = document.getElementById('painBody');
+    body.innerHTML = `
+      <div class="pain-card">
+        <div class="pain-title">${escapeHtml(pain.title)}</div>
+        <div class="pain-goal"><strong>Goal:</strong> ${escapeHtml(pain.goal)}</div>
+
+        <div class="pain-section-h">MUST ASK · ${pain.mustAsk.length}</div>
+        ${pain.mustAsk.map(q => `<div class="pain-q">"${escapeHtml(q)}"</div>`).join('')}
+
+        <div class="pain-section-h probes" style="margin-top: 22px;">PROBES · ${pain.probes.length}</div>
+        ${pain.probes.map(q => `<div class="pain-q probe">"${escapeHtml(q)}"</div>`).join('')}
+
+        <div class="pain-capture">
+          <span class="pain-capture-label">CAPTURE</span>${escapeHtml(pain.capture)}
+        </div>
+      </div>
+    `;
+  }
+
+  async function renderDashboard() {
+    const view = document.getElementById('dashBody');
+    const stats = document.getElementById('dashStats');
+    view.innerHTML = '<div class="dash-empty">Loading deals...</div>';
+    stats.innerHTML = '';
+
+    let deals = [];
+    try {
+      const result = await storage.list(KEY_PREFIX);
+      if (result && result.keys) {
+        for (const k of result.keys) {
+          if (k === THEME_KEY) continue;
+          try {
+            const got = await storage.get(k);
+            if (!got || !got.value) continue;
+            const data = JSON.parse(got.value);
+            const name = k.replace(KEY_PREFIX, '').replace(/_/g, ' ');
+            deals.push({
+              key: k,
+              name,
+              status: data.status || 'active',
+              statusDate: data.statusDate || null,
+              closeReason: data.closeReason || '',
+              createdAt: data.createdAt || null,
+              lastTouched: data.lastTouched || null,
+              items: data.items || {},
+              flags: data.flags || {},
+            });
+          } catch (e) { /* skip */ }
+        }
+      }
+    } catch (e) {}
+
+    const active = deals.filter(d => d.status === 'active').sort(byLastTouchedDesc);
+    const won = deals.filter(d => d.status === 'won').sort(byStatusDateDesc);
+    const lost = deals.filter(d => d.status === 'lost').sort(byStatusDateDesc);
+
+    const closedTotal = won.length + lost.length;
+    const winRate = closedTotal > 0 ? Math.round((won.length / closedTotal) * 100) : 0;
+
+    stats.innerHTML = `
+      <div class="stat"><div class="stat-num">${active.length}</div><div class="stat-label">ACTIVE</div></div>
+      <div class="stat"><div class="stat-num won">${won.length}</div><div class="stat-label">WON</div></div>
+      <div class="stat"><div class="stat-num lost">${lost.length}</div><div class="stat-label">LOST</div></div>
+      <div class="stat"><div class="stat-num rate">${closedTotal > 0 ? winRate + '%' : '--'}</div><div class="stat-label">WIN RATE</div></div>
+    `;
+
+    let body = '';
+    body += renderDealSection('ACTIVE', active, 'active');
+    body += renderDealSection('WON', won, 'won');
+    body += renderDealSection('LOST', lost, 'lost');
+    view.innerHTML = body;
+
+    view.querySelectorAll('[data-load-deal]').forEach(el => {
+      el.addEventListener('click', (e) => {
+        if (e.target.closest('[data-deal-action]')) return;
+        const name = el.dataset.loadDeal;
+        document.getElementById('dealName').value = name;
+        state.mode = 'gates';
+        loadDeal(name).then(render);
+      });
+    });
+
+    view.querySelectorAll('[data-deal-action]').forEach(btn => {
+      btn.addEventListener('click', async (e) => {
+        e.stopPropagation();
+        const action = btn.dataset.dealAction;
+        const name = btn.dataset.dealName;
+        await handleDealStatusChange(name, action);
+      });
+    });
+  }
+
+  function byLastTouchedDesc(a, b) {
+    return (b.lastTouched || '').localeCompare(a.lastTouched || '');
+  }
+  function byStatusDateDesc(a, b) {
+    return (b.statusDate || '').localeCompare(a.statusDate || '');
+  }
+
+  function renderDealSection(title, deals, kind) {
+    const sectionClass = kind === 'won' ? 'won' : (kind === 'lost' ? 'lost' : '');
+    let html = `<div class="dash-section">
+      <div class="dash-section-h ${sectionClass}">${title} · ${deals.length}</div>`;
+    if (deals.length === 0) {
+      html += `<div class="dash-empty">No ${title.toLowerCase()} deals.</div>`;
+    } else {
+      html += deals.map(d => {
+        const totalItems = ALL_ITEMS.length;
+        const captured = ALL_ITEMS.filter(i => d.items[i.id]).length;
+        const gateItems = GATE_ITEMS.length;
+        const gateCaptured = GATE_ITEMS.filter(i => d.items[i.id]).length;
+        const flagCount = Object.values(d.flags || {}).filter(Boolean).length;
+        const dateLabel = kind === 'active'
+          ? (d.lastTouched ? `last touched ${shortDate(d.lastTouched)}` : 'no activity')
+          : (d.statusDate ? `closed ${shortDate(d.statusDate)}` : 'closed');
+
+        let actions = '';
+        if (kind === 'active') {
+          actions = `
+            <button class="deal-action won" data-deal-action="mark-won" data-deal-name="${escapeHtml(d.name)}">WON</button>
+            <button class="deal-action lost" data-deal-action="mark-lost" data-deal-name="${escapeHtml(d.name)}">LOST</button>
+          `;
+        } else {
+          actions = `<button class="deal-action reactivate" data-deal-action="reactivate" data-deal-name="${escapeHtml(d.name)}">REACTIVATE</button>`;
+        }
+
+        const reasonBlock = (kind === 'lost' && d.closeReason)
+          ? `<div class="deal-reason">Reason: ${escapeHtml(d.closeReason)}</div>` : '';
+
+        return `
+          <div class="deal-row" data-load-deal="${escapeHtml(d.name)}">
+            <div>
+              <div class="deal-name">${escapeHtml(d.name.toUpperCase())}</div>
+              <div class="deal-meta">${dateLabel}</div>
+            </div>
+            <div class="deal-coverage">GATES ${gateCaptured}/${gateItems}</div>
+            <div class="deal-coverage">ALL ${captured}/${totalItems}</div>
+            <div class="deal-flags">${flagCount > 0 ? '⚑ ' + flagCount + ' FLAG' + (flagCount > 1 ? 'S' : '') : ''}</div>
+            <div class="deal-actions">${actions}</div>
+            ${reasonBlock}
+          </div>
+        `;
+      }).join('');
+    }
+    html += `</div>`;
+    return html;
+  }
+
+  function shortDate(iso) {
+    try {
+      const d = new Date(iso);
+      return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+    } catch { return iso; }
+  }
+
+  async function handleDealStatusChange(name, action) {
+    try {
+      const got = await storage.get(dealKey(name));
+      if (!got || !got.value) return;
+      const data = JSON.parse(got.value);
+      if (action === 'mark-won') {
+        data.status = 'won';
+        data.statusDate = new Date().toISOString();
+        data.closeReason = '';
+      } else if (action === 'mark-lost') {
+        const reason = prompt(`Lost reason for ${name.toUpperCase()}? (optional)`, data.closeReason || '');
+        if (reason === null) return;
+        data.status = 'lost';
+        data.statusDate = new Date().toISOString();
+        data.closeReason = reason || '';
+      } else if (action === 'reactivate') {
+        data.status = 'active';
+        data.statusDate = null;
+        data.closeReason = '';
+      }
+      data.lastTouched = new Date().toISOString();
+      await storage.set(dealKey(name), JSON.stringify(data));
+      // If the changed deal is currently loaded, sync in-memory state
+      if (state.name === name) {
+        state.status = data.status;
+        state.statusDate = data.statusDate;
+        state.closeReason = data.closeReason;
+      }
+      renderDashboard();
+    } catch (e) { console.warn('status change failed', e); }
+  }
+
+  function renderProposal() {
+    const dealLabel = state.name ? state.name.toUpperCase() : 'NO DEAL SELECTED';
+    document.getElementById('proposalTitle').textContent = `PROPOSAL CALL // ${dealLabel}`;
+    const body = document.getElementById('proposalBody');
+    body.innerHTML = `
+      <div class="prop-card">
+        <div class="prop-card-h">1 · PRE-CALL CHECK</div>
+        <div class="prop-card-sub">Before the call starts.</div>
+        <ul class="prop-list">
+          <li>Is the economic buyer attending? If not, why not?</li>
+          <li>Has procurement been looped in?</li>
+          <li>Did the champion preview pricing offline? No surprises.</li>
+        </ul>
+        <div class="pb-script">Founder (Arlen) joins on 6 of 9 closed-wons. 250-500 employees: notify Arlen. 500+: Arlen leads.</div>
+      </div>
+
+      <div class="prop-card">
+        <div class="prop-card-h">2 · OPEN · ANCHOR THE WHY</div>
+        <div class="prop-card-sub">Re-anchor pain BEFORE pricing. Never the other way around.</div>
+        <div class="prop-q">"Quick recap. You said [friction they named] is costing roughly [their accepted number] a year. We showed you [demo card] catches that on day one. Today is about what it costs and how we get started."</div>
+      </div>
+
+      <div class="prop-card">
+        <div class="prop-card-h">3 · WALK THE PROPOSAL</div>
+        <div class="prop-card-sub">Scope, implementation, pricing. Tied to ROI.</div>
+        <ul class="prop-list">
+          <li>Scope: X courses, Y users, Z branches, languages</li>
+          <li>Implementation: live in 30 days</li>
+          <li>Pricing: <strong>flat-rate, not per-seat</strong> (buyers are allergic to per-seat)</li>
+          <li>Investment: $X. Compared to their $Y pain, payback in Z months</li>
+        </ul>
+      </div>
+
+      <div class="prop-card">
+        <div class="prop-card-h">4 · OBJECTION MAPPING</div>
+        <div class="prop-card-sub">Six common objections and the response.</div>
+        <div class="obj-row"><div class="obj-objection">"Too expensive"</div><div class="obj-response">Anchor against THEIR accepted pain number.</div></div>
+        <div class="obj-row"><div class="obj-objection">"We're shopping around"</div><div class="obj-response">Quinn vs LMS comparison. Sharp.</div></div>
+        <div class="obj-row"><div class="obj-objection">"Implementation timeline?"</div><div class="obj-response">Live in 30 days.</div></div>
+        <div class="obj-row"><div class="obj-objection">"Anyone like us using it?"</div><div class="obj-response">Del-Air for HVAC. Plunkett's for pest. Brooks for rapid scaling.</div></div>
+        <div class="obj-row"><div class="obj-objection">"Need to think about it"</div><div class="obj-response">"What specifically? Let's address it now."</div></div>
+        <div class="obj-row"><div class="obj-objection">"Send the contract, we'll review"</div><div class="obj-response">"Happy to. Who else needs to see it, and what would they want answered?"</div></div>
+      </div>
+
+      <div class="prop-card">
+        <div class="prop-card-h">5 · GET THE VERBAL</div>
+        <div class="prop-card-sub">Stack-rank every blocker. Assign owners. Set a date for each.</div>
+        <div class="prop-q">"On scope, timeline, and price, are we aligned?"</div>
+        <div class="prop-q">"What stands between us and signing this in [X days]?"</div>
+      </div>
+
+      <div class="prop-card">
+        <div class="prop-card-h">6 · PAPER PROCESS</div>
+        <div class="prop-card-sub">Who signs, what reviews, what payment terms.</div>
+        <ul class="prop-list">
+          <li>Who signs? What's their turnaround?</li>
+          <li>Security or Legal review needed?</li>
+          <li>Procurement steps?</li>
+          <li>Payment terms: annual upfront, quarterly, monthly?</li>
+        </ul>
+        <div class="pb-script">Small deal monthly → push for annual. Big deal quarterly → fine.</div>
+      </div>
+
+      <div class="prop-card">
+        <div class="prop-card-h">7 · FORCING FUNCTION (3RD TIME)</div>
+        <div class="prop-card-sub">Same move as Discovery and Demo. Lock the next step before hanging up.</div>
+        <div class="prop-q">"I'll send the redlined version by [X]. Let's lock a 20-minute check-in for [day] to confirm signature timing."</div>
+        <div class="prop-q"><strong>"I'll send the invite now. Can you accept it before we hang up?"</strong></div>
+      </div>
+
+      <div class="prop-card" style="border-left-color: var(--warn);">
+        <div class="prop-card-h" style="color: var(--warn);">RED FLAGS AT PROPOSAL</div>
+        <div class="prop-card-sub">When these appear, call Arlen. Do not try to save it alone.</div>
+        <ul class="prop-list">
+          <li>Champion suddenly quiet between proposal and signature</li>
+          <li>New stakeholder appears who wasn't in prior calls</li>
+          <li>Procurement asks for re-scope</li>
+          <li>"Put this on hold until [vague future event]"</li>
+        </ul>
+      </div>
+    `;
+  }
+
+  function renderPlaybook() {
+    const body = document.getElementById('playbookBody');
+    body.innerHTML = `
+      <div class="pb-card danger">
+        <div class="pb-card-h">DISCOVERY ANTI-PATTERNS</div>
+        <div class="pb-item danger">Asking "walk me through training" then pivoting to "so what does that cost you?" — feels like a setup.</div>
+        <div class="pb-item danger">Naming the pain before they do. "I bet callbacks are killing you" is you projecting.</div>
+        <div class="pb-item danger">Filling silence. If they pause after the bridge question, wait. They're thinking.</div>
+        <div class="pb-item danger">Solving a problem they didn't name.</div>
+        <div class="pb-item danger">Promising a generic "ROI walkthrough" on the next call. Promise a custom demo + deep dive on their named friction.</div>
+      </div>
+
+      <div class="pb-card move">
+        <div class="pb-card-h">GUARDED PROSPECT · 3 MOVES IN ORDER</div>
+        <div class="pb-card-sub" style="font-size:11px;color:var(--text-dim);margin-bottom:10px;letter-spacing:0.04em;">When they won't open up after the bridge question. Escalate in order.</div>
+        <div class="pb-move-name">MOVE 1 · NORMALIZE</div>
+        <div class="pb-script">"Most ops leaders I talk to in [HVAC / mechanical / refrigeration] tell me one of three things is breaking: time to get new techs solo, callbacks tied to inconsistent training, or branch-to-branch quality drift. Does any of that sound familiar, or is your situation different?"</div>
+        <div class="pb-item">You're not supplying their pain. You're giving them permission to name one. They can say no.</div>
+        <div class="pb-move-name">MOVE 2 · COMPARISON (ASPIRATIONAL)</div>
+        <div class="pb-script">"How would you compare your operation today to where you'd want it to be a year from now on training?"</div>
+        <div class="pb-item">People answer aspirational questions more honestly than diagnostic ones.</div>
+        <div class="pb-move-name">MOVE 3 · WALK-AWAY SIGNAL</div>
+        <div class="pb-script">"Sounds like training is in a pretty good place. What got you on this call?"</div>
+        <div class="pb-item">If they can't articulate why they took the meeting, the pain isn't there. Recycle the deal.</div>
+      </div>
+
+      <div class="pb-card move">
+        <div class="pb-card-h">FORCING FUNCTION · USE 3 TIMES</div>
+        <div class="pb-card-sub" style="font-size:11px;color:var(--text-dim);margin-bottom:10px;letter-spacing:0.04em;">End of Discovery, Demo, and Proposal. Single highest-leverage habit.</div>
+        <div class="pb-script"><strong>"I'll send the invite right now. Can you accept it before we hang up?"</strong></div>
+        <div class="pb-move-name">IF THEY PUSH BACK</div>
+        <div class="pb-script">"Send me some times" → "Easier to lock now while I have your calendar in front of me."</div>
+        <div class="pb-script">"Need to check internally" → "Let's hold a slot. We can move it if needed."</div>
+      </div>
+
+      <div class="pb-card comp">
+        <div class="pb-card-h">CUSTOMER COMPS · WHEN TO REACH FOR EACH</div>
+        <div class="pb-comp-row">
+          <div class="pb-comp-name">DEL-AIR</div>
+          <div class="pb-comp-use">HVAC. Callback rate reduction (~18% to under 9%). Use when prospect names callbacks or quality issues.</div>
+        </div>
+        <div class="pb-comp-row">
+          <div class="pb-comp-name">HORIZON SERVICES</div>
+          <div class="pb-comp-use">HVAC. Use as additional HVAC proof point. (Do not use HB McClure as a comp.)</div>
+        </div>
+        <div class="pb-comp-row">
+          <div class="pb-comp-name">PLUNKETT'S</div>
+          <div class="pb-comp-use">Pest control / distributed field service. Use when prospect has many techs across many sites.</div>
+        </div>
+        <div class="pb-comp-row">
+          <div class="pb-comp-name">WHITE KNIGHT</div>
+          <div class="pb-comp-use">Pest control. Additional pest proof point.</div>
+        </div>
+        <div class="pb-comp-row">
+          <div class="pb-comp-name">JANI-TEK</div>
+          <div class="pb-comp-use">Facilities / janitorial. Multi-site, multilingual frontline crews.</div>
+        </div>
+        <div class="pb-comp-row">
+          <div class="pb-comp-name">DIVCON CONTROLS</div>
+          <div class="pb-comp-use">Building automation. Skilled-labor ramp + simulation use case.</div>
+        </div>
+        <div class="pb-comp-row">
+          <div class="pb-comp-name">BROOKS</div>
+          <div class="pb-comp-use">Use when prospect is in rapid hiring or expansion mode.</div>
+        </div>
+      </div>
+
+      <div class="pb-card move">
+        <div class="pb-card-h">3-LAYER PATTERN · DISCOVERY</div>
+        <div class="pb-move-name">LAYER 1 · PROCESS</div>
+        <div class="pb-item">They describe how training works today. Let them talk. Don't interrupt.</div>
+        <div class="pb-move-name">LAYER 2 · FRICTION (THE BRIDGE)</div>
+        <div class="pb-script">"Got it. When you describe that, which part of it isn't working as well as you'd like?"</div>
+        <div class="pb-move-name">LAYER 3 · QUANTIFY</div>
+        <div class="pb-item">Only after they've named the friction. Frequency, cost-per, trend, annual ballpark.</div>
+      </div>
+
+      <div class="pb-card move">
+        <div class="pb-card-h">DEMO HANDLING RULES</div>
+        <div class="pb-item">Prospect asks "can I see X" → one-sentence answer, return to the demo card. Don't tour.</div>
+        <div class="pb-item">Prospect engages hard → do NOT extend. Move to close while engagement is hot.</div>
+        <div class="pb-item">Screen-share fails → narrate from cached screenshots. Demo doesn't die.</div>
+        <div class="pb-item">Prospect tries to negotiate price before proposal → "Pricing's purpose-built around what we just talked about. I'll have that ready for the next call."</div>
+      </div>
+    `;
   }
 
   function renderCoverage() {
